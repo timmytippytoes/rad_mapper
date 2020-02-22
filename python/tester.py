@@ -73,7 +73,6 @@ except KeyboardInterrupt:
         # go through each line in this chunk
         for line in lines[i:i+increment]:
             # if there is data then use it for averaging of hits received
-            # TODO: This should really just check for hits not 'None' for the line itself
             if line is not None and not "None" in line:
                 line_list = line.split()# break up the line into words
                 avg += int(line_list[2])# add hit count to average
