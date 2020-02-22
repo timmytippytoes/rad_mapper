@@ -127,28 +127,28 @@ except KeyboardInterrupt:
         # the following builds our lines based on importance level and color codes them
         if level == 5:
             line_string.name = "Really High Rads"
-            linestring.style.linestyle.width = 5
-            linestring.coords = coords
+            line_string.style.linestyle.width = 5
+            line_string.coords = coords
             line_string.style.linestyle.color = simplekml.Color.red
         elif level == 4:
             line_string.name = "High Rads"
-            linestring.style.linestyle.width = 5
-            linestring.coords = coords
+            line_string.style.linestyle.width = 5
+            line_string.coords = coords
             line_string.style.linestyle.color = simplekml.Color.orange
         elif level == 3:
             line_string.name = "Med Rads"
-            linestring.style.linestyle.width = 5
-            linestring.coords = coords
+            line_string.style.linestyle.width = 5
+            line_string.coords = coords
             line_string.style.linestyle.color = simplekml.Color.yellow
         elif level == 2:
             line_string.name = "Moderate Rads"
-            linestring.style.linestyle.width = 5
-            linestring.coords = coords
+            line_string.style.linestyle.width = 5
+            line_string.coords = coords
             line_string.style.linestyle.color = simplekml.Color.green
         elif level == 1:
             line_string.name = "Lil Extra Rads"
-            linestring.style.linestyle.width = 5
-            linestring.coords = coords
+            line_string.style.linestyle.width = 5
+            line_string.coords = coords
             line_string.style.linestyle.color = simplekml.Color.blue
     kml.save(args.kml) # saves the kml file to specified name defined in args
     print ("All done")
