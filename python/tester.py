@@ -5,6 +5,7 @@ import RPi.GPIO as GPIO
 import time
 from argparse import ArgumentParser
 import simplekml
+from git import Repo
 
 kml = simplekml.Kml(open=1)# setup a kml for map data
 
@@ -18,6 +19,8 @@ parser.add_argument("-p", "--print", dest="printIt",
                     help="print text to screen", metavar="PRINT", default=False)
 parser.add_argument("-i", "--increment", dest="increment",
                     help="the number of counts collected for averaging", metavar="INC", default=20)
+parser.add_argument("-g", "--git", dest="gitIt",
+                    help="add stuff to git", metavar="GIT", default=False)
 args = parser.parse_args()
 
 gps_data = "None"
@@ -29,6 +32,7 @@ def incrementIt(channel):
     # increment hits if GPIO rise detected
     global hits
     hits += 1
+
 
 GPIO.add_event_detect(5,GPIO.RISING, callback=incrementIt) # setup to check for rising on pin 5 and call method when true
 print ("'ctrl c' to exit")
@@ -150,6 +154,19 @@ except KeyboardInterrupt:
             line_string.coords = coords
             line_string.style.linestyle.color = simplekml.Color.blue
     kml.save(args.kml) # saves the kml file to specified name defined in args
+    if args.gitIt:
+        # TODO: this part is not tested yet
+        try:
+            PATH_OF_GIT_REPO = r'../.git'  # or path to git repo
+            COMMIT_MESSAGE = "commit it"
+            repo = Repo(PATH_OF_GIT_REPO)
+            repo.git.add(update=True)
+            repo.git.add([args.filename, args.kml])
+            repo.index.commit(COMMIT_MESSAGE)
+            origin = repo.remote(name='origin')
+            origin.push()
+        except:
+            print('Some error occured while pushing the code')
     print ("All done")
 except Exception as e:
     print ("Something Failed " + e.message) # looks for errors
