@@ -51,7 +51,7 @@ try:
             if args.printIt:
                 print (str(gps_data[0]) + " " + str(gps_data[1]) + " " + str(hits))  # print gps data and hits
             # check if gps data is being received
-            if isinstance(gps_data[0], numbers.REAL):
+            if isinstance(gps_data[0], numbers.Real):
                 file.write(str(gps_data[0]) + " " + str(gps_data[1]) + " " + str(hits) + "\n") # write raw gps and hits data
             hits = 0 # reset hit counter
 except KeyboardInterrupt:
